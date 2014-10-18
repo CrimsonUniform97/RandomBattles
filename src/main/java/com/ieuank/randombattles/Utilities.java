@@ -1,5 +1,7 @@
 package com.ieuank.randombattles;
 
+import org.apache.logging.log4j.Level;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -17,10 +19,13 @@ import com.pixelmonmod.pixelmon.storage.PixelmonStorage;
 import com.pixelmonmod.pixelmon.storage.PlayerNotLoadedException;
 import com.pixelmonmod.pixelmon.storage.PlayerStorage;
 
+import cpw.mods.fml.common.Mod.Instance;
+
 public class Utilities
 {
   static String poke;
-  private static Integer fullParty = 2;
+  private static Integer fullParty = 6;
+  @Instance public static RandomBattles mod;
   
   public static void broadcastServerMessage(String string)
   {
@@ -30,7 +35,9 @@ public class Utilities
     }
   }
   
-  public static void doWin(EntityPlayer p) {}
+  public static void doWin(EntityPlayer p) {
+	  
+  }
   
   public static void getWinner(EntityPlayer p1, PlayerStorage ps1, EntityPlayer p2, PlayerStorage ps2)
   {
@@ -82,6 +89,7 @@ public class Utilities
     }
     else
     {
+    	mod.logger.log(Level.INFO, "Player " + p2.getDisplayName() + " has " + ps2.partyPokemon.length + " Pokémon of which " + fainted2 + " fainted");
       System.out.println("ERROR CALCULATING WINNER! THEY BOTH HAVE ACTIVE POKEMON AFTER BATTLE DOING TIE!");
       doTie();
     }

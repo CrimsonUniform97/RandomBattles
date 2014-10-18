@@ -72,6 +72,7 @@ public class RandomBattleTickHandler
     			if(!b.doneBattle) {
     				b.doBattle();
 					this.mod.logger.log(Level.INFO, "Battling " + b.p1.getDisplayName() + " and " + b.p2.getDisplayName());
+		    		Utilities.broadcastServerMessage(b.p1.getDisplayName() + " and " + b.p2.getDisplayName() + " are now battling.");
     			} else {
     				this.battles.put(b, false);
 					this.mod.logger.log(Level.INFO, "Battle between " + b.p1.getDisplayName() + " and " + b.p2.getDisplayName() + " finished");
