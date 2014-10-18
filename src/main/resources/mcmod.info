@@ -1,0 +1,18 @@
+[
+{
+  "modid": "randombattles",
+  "name": "Random Battles",
+  "description": "Random pixelmon battle matchmaking.",
+  "version": "1.0",
+  "mcversion": "1.7.10",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Ieuan"],
+  "credits": "The Pixelmon devs for making Pixelmon",
+  "logoFile": "",
+  "screenshots": [],
+  "requiredMods": ["pixelmon"],
+  "dependencies": ["pixelmon"],
+  "useDependencyInformation": true
+}
+]
