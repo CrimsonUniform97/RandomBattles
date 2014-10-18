@@ -89,7 +89,8 @@ public class Utilities
     }
     else
     {
-    	mod.logger.log(Level.INFO, "Player " + p2.getDisplayName() + " has " + ps2.partyPokemon.length + " Pokémon of which " + fainted2 + " fainted");
+    	RandomBattles.logger.log(Level.INFO, "Player " + p2.getDisplayName() + " has " + ps2.partyPokemon.length + " Pokémon of which " + fainted2 + " fainted");
+    	RandomBattles.logger.log(Level.INFO, "Player " + p1.getDisplayName() + " has " + ps1.partyPokemon.length + " Pokémon of which " + fainted1 + " fainted");
       System.out.println("ERROR CALCULATING WINNER! THEY BOTH HAVE ACTIVE POKEMON AFTER BATTLE DOING TIE!");
       doTie();
     }
@@ -171,6 +172,41 @@ public class Utilities
         catch (Exception e)
         {
           System.out.println("ERROR CALCULATING POKEMON FOR " + p2.getDisplayName() + "!");
+          return false;
+        }
+      }
+      return true;
+  }
+  
+
+  public static boolean giveRandomPokemon(EntityPlayer pl)
+  {
+      for (int i = 0; i < fullParty; i++) {
+        try
+        {
+          PixelmonStorage.PokeballManager.getPlayerStorage((EntityPlayerMP)pl).changePokemonAndAssignID(i, null);
+        }
+        catch (PlayerNotLoadedException e)
+        {
+          e.printStackTrace();
+        }
+      }
+      for (int i = 0; i < fullParty; i++) {
+        try
+        {
+          poke = EnumPokemon.randomPoke().toString();
+          EntityPixelmon p = (EntityPixelmon)PixelmonEntityList.createEntityByName(poke, pl.getEntityWorld());
+          p.getLvl().setLevel(50);
+          if (p.getMoveset().size() == 0) {
+            p.loadMoveset();
+          }
+          p.caughtBall = EnumPokeballs.PokeBall;
+          
+          PixelmonStorage.PokeballManager.getPlayerStorage((EntityPlayerMP)pl).addToParty(p);
+        }
+        catch (Exception e)
+        {
+          System.out.println("ERROR CALCULATING POKEMON FOR " + pl.getDisplayName() + "!");
           return false;
         }
       }
