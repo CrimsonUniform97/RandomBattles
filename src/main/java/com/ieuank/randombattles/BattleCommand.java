@@ -51,17 +51,16 @@ public class BattleCommand implements ICommand {
 		    	this.mod.playerQueue.put(p, (int) (System.currentTimeMillis() / 1000));
 		    	if(this.mod.playerQueue.size() > 1) {
 		    		CommandChatHandler.sendChat(icommandsender, "You have entered the battle queue. There are now " + this.mod.playerQueue.size() + " people in queue.", new Object[0]);
-		    		this.mod.logger.log(Level.INFO, p.getDisplayName() + " joined the battle queue (" + this.mod.playerQueue.size() + ")");
+		    		RandomBattles.logger.log(Level.INFO, p.getDisplayName() + " joined the battle queue (" + this.mod.playerQueue.size() + ")");
 		    		Utilities.broadcastServerMessage(p.getDisplayName() + " is ready for battle! [" + this.mod.playerQueue.size() + "/inf.]");
 		    	} else {
 		    		CommandChatHandler.sendChat(icommandsender, "You have entered the battle queue. There is now " + this.mod.playerQueue.size() + " person in queue.", new Object[0]);
-		    		this.mod.logger.log(Level.INFO, p.getDisplayName() + " joined the battle queue (" + this.mod.playerQueue.size() + ")");
+		    		RandomBattles.logger.log(Level.INFO, p.getDisplayName() + " joined the battle queue (" + this.mod.playerQueue.size() + ")");
 		    		Utilities.broadcastServerMessage(p.getDisplayName() + " is ready for battle! [" + this.mod.playerQueue.size() + "/inf.]");
 			    }
 	    	} else {
 	    		CommandChatHandler.sendChat(icommandsender, "You can not enter the queue while in a battle.", new Object[0]);
-	    		this.mod.logger.log(Level.INFO, p.getDisplayName() + " tried joining battle queue while in a battle.");
-	    		
+	    		RandomBattles.logger.log(Level.INFO, p.getDisplayName() + " tried joining battle queue while in a battle.");
 	    	}
 	    } else {
 	      CommandChatHandler.sendChat(icommandsender, "Invalid arguments", new Object[0]);

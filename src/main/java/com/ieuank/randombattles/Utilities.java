@@ -1,13 +1,11 @@
 package com.ieuank.randombattles;
 
-import org.apache.logging.log4j.Level;
-
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
+
+import org.apache.logging.log4j.Level;
 
 import com.pixelmonmod.pixelmon.battles.controller.BattleController2Participant;
 import com.pixelmonmod.pixelmon.battles.controller.participants.PlayerParticipant;

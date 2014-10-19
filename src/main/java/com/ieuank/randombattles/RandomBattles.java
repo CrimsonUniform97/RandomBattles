@@ -47,6 +47,6 @@ public class RandomBattles
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
         event.registerServerCommand(new BattleCommand(this));
-        event.registerServerCommand(new ResetPokemonCMD(this));
+        event.registerServerCommand(new ResetPokemonCMD());
     }
 }

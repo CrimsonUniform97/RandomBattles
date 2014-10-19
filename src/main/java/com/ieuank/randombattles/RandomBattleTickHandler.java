@@ -3,15 +3,9 @@ package com.ieuank.randombattles;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.logging.log4j.Level;
-
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatComponentTranslation;
 
-import com.pixelmonmod.pixelmon.battles.BattleRegistry;
-import com.pixelmonmod.pixelmon.storage.PlayerStorage;
+import org.apache.logging.log4j.Level;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -43,17 +37,17 @@ public class RandomBattleTickHandler
 				if(currentTime - joinTime > 300) {
 					// In queue longer than 5m
 					this.removeQueue(p);
-					this.mod.logger.log(Level.INFO, "Removed player " + p.getDisplayName() + " from queue after " + (currentTime - joinTime) + " seconds");
+					RandomBattles.logger.log(Level.INFO, "Removed player " + p.getDisplayName() + " from queue after " + (currentTime - joinTime) + " seconds");
 				} else {
 					if(p1 == null) {
 						p1 = p;
-						this.mod.logger.log(Level.INFO, "Trying to match player " + p.getDisplayName() + " to someone in the queue");
+						RandomBattles.logger.log(Level.INFO, "Trying to match player " + p.getDisplayName() + " to someone in the queue");
 					} else if (p2 == null) {
 						p2 = p;
-						this.mod.logger.log(Level.INFO, "Matched player " + p1.getDisplayName() + " to " + p.getDisplayName() + " (" + this.battles.size() + 1 + ")");
+						RandomBattles.logger.log(Level.INFO, "Matched player " + p1.getDisplayName() + " to " + p.getDisplayName() + " (" + this.battles.size() + 1 + ")");
 						Battle b = new Battle(p1, p2);
 						this.battles.put(b, true);
-						this.mod.logger.log(Level.INFO, "Started battle between " + p1.getDisplayName() + " and " + p2.getDisplayName());
+						RandomBattles.logger.log(Level.INFO, "Started battle between " + p1.getDisplayName() + " and " + p2.getDisplayName());
 						this.removeQueue(p1);
 						this.removeQueue(p2);
 						p1 = null;
@@ -71,15 +65,15 @@ public class RandomBattleTickHandler
     			// Battle active
     			if(!b.doneBattle) {
     				b.doBattle();
-					this.mod.logger.log(Level.INFO, "Battling " + b.p1.getDisplayName() + " and " + b.p2.getDisplayName());
+					RandomBattles.logger.log(Level.INFO, "Battling " + b.p1.getDisplayName() + " and " + b.p2.getDisplayName());
 		    		Utilities.broadcastServerMessage(b.p1.getDisplayName() + " and " + b.p2.getDisplayName() + " are now battling.");
     			} else {
     				this.battles.put(b, false);
-					this.mod.logger.log(Level.INFO, "Battle between " + b.p1.getDisplayName() + " and " + b.p2.getDisplayName() + " finished");
+					RandomBattles.logger.log(Level.INFO, "Battle between " + b.p1.getDisplayName() + " and " + b.p2.getDisplayName() + " finished");
 					Utilities.getWinner(b.p1, b.ps1, b.p2, b.ps2);
     			}
     		} else {
-				this.mod.logger.log(Level.INFO, "Battle between " + b.p1.getDisplayName() + " and " + b.p2.getDisplayName() + " removed");
+				RandomBattles.logger.log(Level.INFO, "Battle between " + b.p1.getDisplayName() + " and " + b.p2.getDisplayName() + " removed");
 				this.battles.remove(b);
     		}
     	}

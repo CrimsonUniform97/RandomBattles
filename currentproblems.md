@@ -1,0 +1,4 @@
+- Battle ending not correctly recognized (battle is dismissed immediately after starting, check both players for active battle before dismissing)
+- Some issues like pressing Tab while in a battle crashing, not sure if RandoMBattles or Pixelmon problem
+- After battle people keep their current party, temp fix is /resetpokemon but is not an option for live server because of RNG forcing
+- No Enjin implemented yet

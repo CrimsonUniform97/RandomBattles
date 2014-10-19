@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.Level;
 
+import com.pixelmonmod.pixelmon.battles.BattleRegistry;
 import com.pixelmonmod.pixelmon.comm.CommandChatHandler;
 
 import net.minecraft.command.ICommand;
@@ -15,10 +16,8 @@ import net.minecraft.util.ChatComponentTranslation;
 
 public class ResetPokemonCMD implements ICommand {
 	private List<String> aliases;
-	private RandomBattles mod;
-	  public ResetPokemonCMD(RandomBattles rb)
+	  public ResetPokemonCMD()
 	  {
-		this.mod = rb;
 	    this.aliases = new ArrayList<String>();
 	    this.aliases.add("resetpokemon");
 	  }
@@ -46,8 +45,14 @@ public class ResetPokemonCMD implements ICommand {
 	    if(astring.length == 0)
 	    {
 	    	EntityPlayerMP p = MinecraftServer.getServer().getConfigurationManager().func_152612_a(icommandsender.getCommandSenderName());
-	    	Utilities.giveRandomPokemon(p);
-	    	p.addChatComponentMessage((new ChatComponentTranslation("You got random pokémon", new Object[0])));
+
+	    	if(BattleRegistry.getBattle(p) == null) {
+		    	Utilities.giveRandomPokemon(p);
+		    	p.addChatComponentMessage((new ChatComponentTranslation("You got random pokémon", new Object[0])));
+	    	} else {
+	    		CommandChatHandler.sendChat(icommandsender, "You can not reset your pokémon while in a battle.", new Object[0]);
+	    		RandomBattles.logger.log(Level.INFO, p.getDisplayName() + " tried resetting their pokémon while in a battle.");
+	    	}
 	    } else {
 	      CommandChatHandler.sendChat(icommandsender, "Invalid arguments", new Object[0]);
 	      CommandChatHandler.sendChat(icommandsender, this.getCommandUsage(icommandsender), new Object[0]);
